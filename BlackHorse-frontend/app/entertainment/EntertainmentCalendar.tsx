@@ -132,8 +132,7 @@ export function EntertainmentCalendar({ events }: { events: EventItem[] }) {
                   alignItems: 'center', 
                   justifyContent: 'center', 
                   cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                  hoverEffect: true
+                  transition: 'all 0.2s ease'
                 }}
                 onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--accent-glow)')}
                 onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}

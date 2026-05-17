@@ -24,7 +24,7 @@ export function MenuViewButtons() {
             title={option.label}
             style={{
               display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 20px',
-              border: 'none', borderRadius: '50px', cursor: 'pointer',
+              borderRadius: '50px', cursor: 'pointer',
               background: isActive ? 'var(--glass)' : 'transparent',
               color: isActive ? 'var(--accent)' : 'var(--ink2)',
               fontWeight: isActive ? 600 : 500, fontSize: '14px',
