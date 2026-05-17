@@ -7,6 +7,28 @@ import { ScrollReveal } from "../components/ScrollReveal";
 
 export type OpenMicEvent = { id: number; title: string; description?: string; date: string; maxParticipants?: number };
 
+// Animated Music Visualizer subcomponent
+function SoundwaveVisualizer({ active }: { active: boolean }) {
+  return (
+    <div style={{ display: 'flex', gap: '4px', alignItems: 'flex-end', height: '24px', marginLeft: 'auto', paddingRight: '8px' }}>
+      {[0.6, 1.1, 0.8, 1.3, 0.5, 0.9].map((delay, i) => (
+        <span
+          key={i}
+          className="sound-bar"
+          style={{
+            animationDelay: `${delay}s`,
+            animationPlayState: active ? 'running' : 'paused',
+            width: '3px',
+            borderRadius: '3px',
+            opacity: active ? 1 : 0.4,
+            transition: 'opacity 0.3s ease'
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
 // Premium animated house rule list item
 function HouseRuleItem({ rule }: { rule: string }) {
   const [hovered, setHovered] = useState(false);
@@ -41,34 +63,46 @@ function HouseRuleItem({ rule }: { rule: string }) {
   );
 }
 
-// Premium animated event selection card
+// Premium animated event selection card with Dynamic Color Spectrum themes
 function OpenMicEventCard({ 
   event, 
   isSelected, 
-  onSelect 
+  onSelect,
+  index
 }: { 
   event: OpenMicEvent; 
   isSelected: boolean; 
-  onSelect: () => void 
+  onSelect: () => void;
+  index: number;
 }) {
   const [hovered, setHovered] = useState(false);
+
+  // Dynamic Rainbow Theme selector
+  const themes = [
+    { name: "purple", primary: "var(--accent)", glow: "var(--accent-glow)", shadow: "rgba(139, 92, 246, 0.25)" },
+    { name: "cyan", primary: "var(--cyan)", glow: "rgba(6, 182, 212, 0.18)", shadow: "rgba(6, 182, 212, 0.25)" },
+    { name: "rose", primary: "var(--rose)", glow: "rgba(244, 63, 94, 0.18)", shadow: "rgba(244, 63, 94, 0.25)" },
+    { name: "emerald", primary: "var(--emerald)", glow: "rgba(16, 185, 129, 0.18)", shadow: "rgba(16, 185, 129, 0.25)" }
+  ];
+  const theme = themes[index % themes.length];
+
   return (
     <article
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
         background: isSelected 
-          ? 'linear-gradient(135deg, rgba(139, 92, 246, 0.12) 0%, rgba(139, 92, 246, 0.04) 100%)' 
+          ? `linear-gradient(135deg, ${theme.glow} 0%, rgba(255, 255, 255, 0.04) 100%)` 
           : 'var(--glass)',
         border: isSelected 
-          ? '2px solid var(--accent)' 
+          ? `2px solid ${theme.primary}` 
           : hovered 
-            ? '1.5px solid var(--accent)' 
+            ? `1.5px solid ${theme.primary}` 
             : '1px solid var(--border2)',
         boxShadow: isSelected 
-          ? '0 16px 40px rgba(139, 92, 246, 0.22)' 
+          ? `0 16px 40px ${theme.shadow}` 
           : hovered 
-            ? '0 12px 30px rgba(139, 92, 246, 0.12)' 
+            ? `0 12px 30px ${theme.shadow}` 
             : 'var(--shadow)',
         transform: hovered ? 'translateY(-8px)' : 'none',
         transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
@@ -79,10 +113,11 @@ function OpenMicEventCard({
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        zIndex: 1
       }}
     >
-      {/* Decorative premium hover glow */}
+      {/* Dynamic ambient hover glow orb */}
       {hovered && (
         <div style={{
           position: 'absolute',
@@ -90,7 +125,7 @@ function OpenMicEventCard({
           left: '-50%',
           width: '200%',
           height: '200%',
-          background: 'radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, transparent 60%)',
+          background: `radial-gradient(circle, ${theme.glow} 0%, transparent 60%)`,
           pointerEvents: 'none',
           zIndex: 0
         }} />
@@ -102,15 +137,15 @@ function OpenMicEventCard({
             width: '52px', 
             height: '52px', 
             borderRadius: '14px',
-            background: isSelected ? 'var(--accent)' : hovered ? 'var(--accent-glow)' : 'var(--surface2)',
-            color: isSelected ? '#fff' : hovered ? 'var(--accent)' : 'var(--ink2)',
+            background: isSelected ? theme.primary : hovered ? theme.glow : 'var(--surface2)',
+            color: isSelected ? '#fff' : hovered ? theme.primary : 'var(--ink2)',
             display: 'flex', 
             alignItems: 'center', 
             justifyContent: 'center',
             marginBottom: '24px',
             transform: hovered ? 'scale(1.1) rotate(10deg)' : 'none',
             transition: 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',
-            boxShadow: isSelected ? '0 8px 16px rgba(139, 92, 246, 0.3)' : 'none'
+            boxShadow: isSelected ? `0 8px 16px ${theme.shadow}` : 'none'
           }}
         >
           <Mic2 size={24} />
@@ -118,7 +153,7 @@ function OpenMicEventCard({
 
         <h3 className="card-title" style={{ fontSize: '22px', fontWeight: 800, marginBottom: '10px', color: 'var(--ink)' }}>{event.title}</h3>
         
-        <p className="event-date" style={{ color: 'var(--accent)', fontWeight: 700, marginBottom: '16px', fontSize: '15px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <p className="event-date" style={{ color: theme.primary, fontWeight: 700, marginBottom: '16px', fontSize: '15px', display: 'flex', alignItems: 'center', gap: '8px' }}>
           <span style={{ transform: hovered ? 'scale(1.2)' : 'none', transition: 'all 0.3s' }}>📅</span> {event.date}
         </p>
 
@@ -126,15 +161,15 @@ function OpenMicEventCard({
           <span style={{ 
             display: 'inline-block', 
             padding: '6px 12px', 
-            background: isSelected ? 'var(--accent)' : 'var(--accent-glow)', 
-            color: isSelected ? '#fff' : 'var(--accent)', 
+            background: isSelected ? theme.primary : theme.glow, 
+            color: isSelected ? '#fff' : theme.primary, 
             borderRadius: '50px', 
             fontSize: '11px', 
             fontWeight: 800, 
             textTransform: 'uppercase', 
             letterSpacing: '1.5px', 
             marginBottom: '20px',
-            boxShadow: isSelected ? '0 4px 12px rgba(139, 92, 246, 0.2)' : 'none'
+            boxShadow: isSelected ? `0 4px 12px ${theme.shadow}` : 'none'
           }}>
             Max {event.maxParticipants} Performers
           </span>
@@ -146,16 +181,20 @@ function OpenMicEventCard({
       </div>
 
       <button 
-        className={`btn ${isSelected ? 'btn-primary' : 'btn-outline'}`}
+        className="btn"
         onClick={onSelect}
         style={{ 
           width: '100%', 
           justifyContent: 'center',
+          background: isSelected ? theme.primary : 'transparent',
+          border: isSelected ? 'none' : `2px solid ${theme.primary}`,
+          color: isSelected ? '#fff' : theme.primary,
           transform: hovered && !isSelected ? 'translateY(-2px)' : 'none',
-          boxShadow: hovered && !isSelected ? '0 6px 16px rgba(139, 92, 246, 0.15)' : 'none',
+          boxShadow: hovered && !isSelected ? `0 6px 16px ${theme.shadow}` : 'none',
           transition: 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',
           position: 'relative',
-          zIndex: 1
+          zIndex: 1,
+          fontWeight: 700
         }}
       >
         {isSelected ? '✓ Selected' : 'Select This Date'}
@@ -180,16 +219,22 @@ export function OpenMicContent({ events }: { events: OpenMicEvent[] }) {
   const [cardHovered, setCardHovered] = useState(false);
 
   return (
-    <section className="section" style={{ padding: '80px 24px' }}>
+    <section className="section" style={{ padding: '80px 24px', position: 'relative', overflow: 'hidden' }}>
+      
+      {/* 🌌 Animated Backdrop Orbs (Vibrant Neon Glow Bleed) */}
+      <div className="floating-orb" style={{ top: '5%', left: '10%', width: '400px', height: '400px', background: 'radial-gradient(circle, rgba(139, 92, 246, 0.22) 0%, transparent 70%)' }} />
+      <div className="floating-orb" style={{ top: '40%', right: '5%', width: '450px', height: '450px', background: 'radial-gradient(circle, rgba(6, 182, 212, 0.2) 0%, transparent 70%)', animationDelay: '-5s' }} />
+      <div className="floating-orb" style={{ bottom: '5%', left: '20%', width: '350px', height: '350px', background: 'radial-gradient(circle, rgba(244, 63, 94, 0.18) 0%, transparent 70%)', animationDelay: '-10s' }} />
+
       <ScrollReveal direction="up">
-        <div className="section-header" style={{ marginBottom: '48px' }}>
+        <div className="section-header" style={{ marginBottom: '48px', position: 'relative', zIndex: 1 }}>
           <div style={{ color: 'var(--accent)', marginBottom: '16px' }}><Mic2 size={36} /></div>
-          <h2 style={{ fontSize: '42px', fontWeight: 900 }}>Performer Guidelines</h2>
+          <h2 className="text-shimmer" style={{ fontSize: '42px', fontWeight: 900, display: 'inline-block' }}>Performer Guidelines</h2>
           <p>Everything you need to know before stepping up to the mic.</p>
         </div>
       </ScrollReveal>
 
-      <div className="grid" style={{ marginBottom: '80px', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '40px', alignItems: 'stretch' }}>
+      <div className="grid" style={{ marginBottom: '80px', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '40px', alignItems: 'stretch', position: 'relative', zIndex: 1 }}>
         <ScrollReveal direction="right">
           <div 
             className="glass-card" 
@@ -197,7 +242,7 @@ export function OpenMicContent({ events }: { events: OpenMicEvent[] }) {
             onMouseLeave={() => setCardHovered(false)}
             style={{ 
               height: '100%', 
-              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(139, 92, 246, 0.08) 100%)', 
+              background: 'linear-gradient(135deg, rgba(250, 248, 253, 0.85) 0%, rgba(139, 92, 246, 0.08) 100%)', 
               padding: '40px',
               border: cardHovered ? '1.5px solid var(--accent)' : '1px solid var(--border2)',
               boxShadow: cardHovered ? '0 16px 40px rgba(139, 92, 246, 0.15)' : 'var(--shadow)',
@@ -205,18 +250,22 @@ export function OpenMicContent({ events }: { events: OpenMicEvent[] }) {
               transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)'
             }}
           >
-            <div 
-              className="card-icon-wrap" 
-              style={{ 
-                color: '#fff', 
-                background: 'linear-gradient(135deg, var(--accent), var(--accent-dim))',
-                marginBottom: '24px',
-                transform: cardHovered ? 'scale(1.1) rotate(-5deg)' : 'none',
-                transition: 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)'
-              }}
-            >
-              <Star size={24} />
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
+              <div 
+                className="card-icon-wrap" 
+                style={{ 
+                  color: '#fff', 
+                  background: 'linear-gradient(135deg, var(--accent), var(--accent-dim))',
+                  margin: 0,
+                  transform: cardHovered ? 'scale(1.1) rotate(-5deg)' : 'none',
+                  transition: 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)'
+                }}
+              >
+                <Star size={24} />
+              </div>
+              <SoundwaveVisualizer active={cardHovered} />
             </div>
+            
             <h3 className="card-title" style={{ fontSize: '26px', fontWeight: 800, color: 'var(--ink)' }}>House Rules</h3>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '20px', marginTop: '28px', padding: 0 }}>
               {[
@@ -244,14 +293,14 @@ export function OpenMicContent({ events }: { events: OpenMicEvent[] }) {
       </div>
 
       <ScrollReveal direction="up">
-        <div className="section-header" style={{ marginTop: '100px', marginBottom: '48px' }}>
-          <h2 style={{ fontSize: '38px', fontWeight: 900 }}>Upcoming Open Mic Nights</h2>
+        <div className="section-header" style={{ marginTop: '100px', marginBottom: '48px', position: 'relative', zIndex: 1 }}>
+          <h2 className="text-shimmer" style={{ fontSize: '38px', fontWeight: 900, display: 'inline-block' }}>Upcoming Open Mic Nights</h2>
           <p>Find a date that works for you and register below.</p>
         </div>
       </ScrollReveal>
 
       {events.length > 0 ? (
-        <div className="grid" style={{ gap: '32px', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))' }}>
+        <div className="grid" style={{ gap: '32px', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', position: 'relative', zIndex: 1 }}>
           {events.map((event, i) => {
             const isSelected = selectedEventId === event.id;
             return (
@@ -260,6 +309,7 @@ export function OpenMicContent({ events }: { events: OpenMicEvent[] }) {
                   event={event}
                   isSelected={isSelected}
                   onSelect={() => handleSelectEvent(event.id)}
+                  index={i}
                 />
               </ScrollReveal>
             );
@@ -267,7 +317,7 @@ export function OpenMicContent({ events }: { events: OpenMicEvent[] }) {
         </div>
       ) : (
         <ScrollReveal direction="up">
-          <div style={{ textAlign: 'center', padding: '80px 20px', background: 'var(--glass)', border: '1px solid var(--border2)', borderRadius: 'var(--radius-lg)', boxShadow: 'var(--shadow)' }}>
+          <div style={{ textAlign: 'center', padding: '80px 20px', background: 'var(--glass)', border: '1px solid var(--border2)', borderRadius: 'var(--radius-lg)', boxShadow: 'var(--shadow)', position: 'relative', zIndex: 1 }}>
             <div style={{ color: 'var(--muted)', marginBottom: '20px' }}><Mic2 size={48} style={{ margin: '0 auto', opacity: 0.5 }}/></div>
             <h3 style={{ fontSize: '26px', fontWeight: 800, marginBottom: '8px', color: 'var(--ink)' }}>Dates Coming Soon!</h3>
             <p style={{ color: 'var(--muted)', fontSize: '16px' }}>Check back for upcoming open mic night schedules.</p>

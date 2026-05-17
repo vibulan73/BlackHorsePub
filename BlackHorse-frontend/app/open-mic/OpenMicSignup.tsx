@@ -63,7 +63,7 @@ export function OpenMicSignup({
           alignItems: 'center', 
           justifyContent: 'center', 
           padding: '40px',
-          background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(16, 185, 129, 0.08) 100%)',
+          background: 'linear-gradient(135deg, rgba(250, 248, 253, 0.85) 0%, rgba(16, 185, 129, 0.08) 100%)',
           border: '1.5px solid var(--emerald)',
           boxShadow: '0 20px 48px rgba(16, 185, 129, 0.15)',
           borderRadius: 'var(--radius-lg)'
@@ -133,7 +133,7 @@ export function OpenMicSignup({
       style={{ 
         height: '100%', 
         padding: '40px',
-        background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(6, 182, 212, 0.08) 100%)',
+        background: 'linear-gradient(135deg, rgba(250, 248, 253, 0.85) 0%, rgba(6, 182, 212, 0.08) 100%)',
         border: formHovered ? '1.5px solid var(--cyan)' : '1px solid var(--border2)',
         boxShadow: formHovered ? '0 16px 40px rgba(6, 182, 212, 0.15)' : 'var(--shadow)',
         transform: formHovered ? 'translateY(-6px)' : 'none',
