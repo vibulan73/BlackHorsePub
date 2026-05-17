@@ -14,7 +14,7 @@ export function LocationMap() {
             <div style={{ color: 'var(--accent)', marginTop: '4px' }}><MapPin size={20} /></div>
             <div>
               <strong style={{ display: 'block', fontSize: '16px', color: 'var(--ink)' }}>The Black Horse Pub</strong>
-              <span style={{ color: 'var(--muted)', fontSize: '15px' }}>123 Main Street<br/>Your City, ST 12345</span>
+              <span style={{ color: 'var(--muted)', fontSize: '15px' }}>452 George Street North<br/>Peterborough, ON K9H-3R7</span>
             </div>
           </div>
 
@@ -29,7 +29,7 @@ export function LocationMap() {
           <div style={{ display: 'flex', gap: '16px', marginBottom: '20px' }}>
             <div style={{ color: 'var(--accent)', marginTop: '4px' }}><Phone size={20} /></div>
             <div>
-              <a href="tel:+10000000000" style={{ color: 'var(--ink)', fontSize: '15px' }}>+1 (000) 000-0000</a>
+              <a href="tel:+17057420633" style={{ color: 'var(--ink)', fontSize: '15px' }}>+1 (705) 742-0633</a>
             </div>
           </div>
 
@@ -45,7 +45,7 @@ export function LocationMap() {
       <ScrollReveal direction="right">
         <div style={{ borderRadius: 'var(--radius-lg)', overflow: 'hidden', border: '1px solid var(--border2)', boxShadow: 'var(--shadow-lg)', height: '450px' }}>
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2855.1183235181156!2d-78.32252982487972!3d44.307517971078646!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89d58ce0339dc40f%3A0x9830a9bad4cbb14f!2sThe%20Black%20Horse%20Pub!5e0!3m2!1sen!2slk!4v1778120310727!5m2!1sen!2slk"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2855.118322111352!2d-78.3199549!3d44.307518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89d58ce0339dc40f%3A0x9830a9bad4cbb14f!2sThe%20Black%20Horse%20Pub!5e0!3m2!1sen!2slk!4v1779042764455!5m2!1sen!2slk"
             width="100%"
             height="100%"
             style={{ border: 0 }}

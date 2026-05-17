@@ -26,7 +26,7 @@ export default function ContactPage() {
             <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
               <div className="card-icon-wrap" style={{ borderRadius: '50%' }}><MapPin size={24} /></div>
               <h3 className="card-title">Location</h3>
-              <p className="card-desc">123 Main Street<br/>Your City, ST 12345</p>
+              <p className="card-desc">452 George Street North<br/>Peterborough, ON K9H-3R7</p>
             </div>
           </ScrollReveal>
 
@@ -34,7 +34,7 @@ export default function ContactPage() {
             <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
               <div className="card-icon-wrap" style={{ borderRadius: '50%' }}><Phone size={24} /></div>
               <h3 className="card-title">Phone</h3>
-              <p className="card-desc"><a href="tel:+10000000000" style={{ color: 'var(--ink)' }}>+1 (000) 000-0000</a></p>
+              <p className="card-desc"><a href="tel:+17057420633" style={{ color: 'var(--ink)' }}>+1 (705) 742-0633</a></p>
             </div>
           </ScrollReveal>
 

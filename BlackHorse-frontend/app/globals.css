@@ -487,7 +487,7 @@ main { flex: 1; }
 }
 .footer-inner {
   max-width: 1320px; margin: 0 auto; padding: 80px 24px 60px;
-  display: grid; gap: 48px; grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  display: grid; gap: 48px; grid-template-columns: 2fr 2fr 1.5fr;
 }
 .footer-logo { display: flex; align-items: center; gap: 12px; font-family: var(--font-heading); font-size: 20px; font-weight: 900; color: var(--ink); margin-bottom: 16px; }
 .footer-brand p { margin-bottom: 24px; font-size: 15px; }

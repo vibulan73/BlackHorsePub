@@ -2,19 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { API_BASE } from "../lib/api";
-import { Facebook, Instagram, Twitter, Phone, Mail, MapPin, Clock, ArrowUp } from "lucide-react";
-import Link from "next/link";
-
-const quickLinks = [
-  ["Home", "/home"],
-  ["Menu", "/menu"],
-  ["On Tap", "/on-tap"],
-  ["Reservations", "/reservations"],
-  ["Entertainment", "/entertainment"],
-  ["Open Mic", "/open-mic"],
-  ["Our Story", "/our-story"],
-  ["Contact", "/contact"],
-];
+import { Facebook, Instagram, Phone, Mail, MapPin, Clock, ArrowUp } from "lucide-react";
 
 const hours = [
   ["Mon – Thu", "11am – 11pm"],
@@ -55,29 +43,34 @@ export function Footer() {
           </div>
           <p>Cold beer, proper pub food, live entertainment, and a community that feels like family. Your neighbourhood gathering place.</p>
           <div className="footer-contact-row">
-            <a href="tel:+10000000000" className="footer-contact-link"><Phone size={14} /> +1 (000) 000-0000</a>
+            <a href="tel:+17057420633" className="footer-contact-link"><Phone size={14} /> +1 (705) 742-0633</a>
             <a href="mailto:hello@blackhorsepub.com" className="footer-contact-link"><Mail size={14} /> hello@blackhorsepub.com</a>
-            <span className="footer-contact-link"><MapPin size={14} /> 123 Main Street, Your City</span>
+            <span className="footer-contact-link"><MapPin size={14} /> 452 George Street North, Peterborough, ON K9H-3R7</span>
           </div>
           <div className="footer-socials">
-            <a href="#" aria-label="Facebook" className="social-icon"><Facebook size={16} /></a>
-            <a href="#" aria-label="Instagram" className="social-icon"><Instagram size={16} /></a>
-            <a href="#" aria-label="Twitter" className="social-icon"><Twitter size={16} /></a>
+            <a href="https://www.facebook.com/theblackhorsepub?fref=ts#" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="social-icon"><Facebook size={16} /></a>
+            <a href="https://www.instagram.com/blackhorseptbo/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="social-icon"><Instagram size={16} /></a>
           </div>
         </div>
 
-        {/* Quick Links */}
-        <div className="footer-col">
-          <h4>Explore</h4>
-          <ul className="footer-links">
-            {quickLinks.map(([label, href]) => (
-              <li key={href}><Link href={href}>{label}</Link></li>
-            ))}
-          </ul>
+        {/* Map */}
+        <div className="footer-col" style={{ minWidth: '320px', flex: '1.5' }}>
+          <h4>Our Location</h4>
+          <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--border2)', height: '260px', marginTop: '16px' }}>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2855.118322111352!2d-78.3199549!3d44.307518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89d58ce0339dc40f%3A0x9830a9bad4cbb14f!2sThe%20Black%20Horse%20Pub!5e0!3m2!1sen!2slk!4v1779042764455!5m2!1sen!2slk"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
         </div>
 
-        {/* Hours */}
-        <div className="footer-col">
+        {/* Hours & Stay in the Loop */}
+        <div className="footer-col" style={{ minWidth: '240px' }}>
           <h4><Clock size={14} style={{ display: "inline", marginRight: 6 }} />Hours</h4>
           <ul className="footer-hours">
             {hours.map(([day, time]) => (
@@ -87,13 +80,10 @@ export function Footer() {
               </li>
             ))}
           </ul>
-          <p className="footer-note">Kitchen closes 1hr before close.</p>
-        </div>
+          <p className="footer-note" style={{ marginBottom: '28px' }}>Kitchen closes 1hr before close.</p>
 
-        {/* Newsletter */}
-        <div className="footer-col">
-          <h4>Stay in the Loop</h4>
-          <p>Events, specials, and exclusive updates — straight to your inbox.</p>
+          <h4 style={{ marginTop: '24px' }}>Stay in the Loop</h4>
+          <p style={{ fontSize: '14px', color: 'var(--ink2)', marginBottom: '16px' }}>Events, specials, and exclusive updates — straight to your inbox.</p>
           <form onSubmit={subscribe} className="footer-newsletter">
             <input
               value={email}
